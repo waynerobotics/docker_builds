@@ -1,0 +1,16 @@
+<launch>
+
+    <!-- Start turtlesim_node -->
+    <node name="turtlesim_node" pkg="turtlesim" type="turtlesim_node" output="screen">
+        <remap from="/turtle1/cmd_vel" to="/cmd_vel" />
+    </node>
+
+    <!-- Run turtle_test go_to_x -->
+    <node name="go_to_x" pkg="turtle_test" type="go_to_x" output="screen">
+        <remap from="/turtle1/cmd_vel" to="/cmd_vel" />
+    </node>
+  
+    <!-- Launch rqt_robot_steering -->
+    <node name="rqt_robot_steering" pkg="rqt_robot_steering" type="rqt_robot_steering" output="screen" />
+    
+</launch>
