@@ -1,43 +1,52 @@
 
-# ROS1 Noetic Docker Container Setup and Troubleshooting Guide for VS Code on Windows 
+# ROS1 Noetic Docker Container Setup and Troubleshooting Guide for VS Code on Ubuntu 
 This will start a containerized Ubuntu 20.04 machine with ROS Noetic installed in Docker right in VSCode
 
 ## Prerequisites
-- Windows machine with Docker installed
+- Ubuntu machine with Docker installed
 - Visual Studio Code installed
 - Docker extension for VS Code installed
 
 ## General Setup
 
 1. **Ensure Docker Engine is Running**:
-   - Before starting, make sure the Docker engine is active on your system. You can check this by looking for the Docker icon in the system tray.
+   - Before starting, make sure the Docker engine is active on your system. You can check this by with: sudo systemctl status docker
+   - If Docker is not running, start it with: sudo systemctl start docker
+   - To enable Docker to start on boot: sudo systemctl enable docker
+   - Run a simple Docker command to ensure Docker is installed and functioning correctly: sudo docker run hello-world
+   - You should see a "Hello from Docker!" message if everything is working correctly.
 
-2. **Clone and Check Out Correct Branch**:
+2. **Set Up Environment for Docker GUI Applications**:
+   - xhost +local:docker
+   - To make this change permanent, add the command to your .bashrc: echo "xhost +local:docker" >> ~/.bashrc
+
+
+3. **Clone and Check Out Correct Branch**:
    - Open the Command Prompt from the Start Menu.
    - Clone the repository containing the Docker container setup files:
      ```
      git clone https://github.com/waynerobotics/docker_builds.git
      cd docker_builds
-     git checkout ros1_noetic_for_windows
+     git checkout ros1_noetic_for_ubuntu
      ```
 
-3. **Open Visual Studio Code**:
+4. **Open Visual Studio Code**:
    - Open the cloned repository folder in VS Code.
    - You should have a .devcontainer folder that contains the files necessary to tell Docker how to build and run your Docker container.
    - You should also be in the root directory of a bare-bones catkin workspace with a single test package called turtle_test.
 
-4. **Start Docker Container**:
-   - Press `Ctrl + Shift + P` to open the command palette.
-   - Type `Docker: Compose Up` and select the option to start the Docker container.
+5. **Start Docker Container**:
+   - Click the Remote - Containers icon (a blue square with an icon) in the lower left corner of the VS Code window.
+   - Select Reopen in Container.
    - Wait for the container to start, checking the status in the Docker extension sidebar.
 
-5. **Begin Work**:
+6. **Begin Work**:
    - Once the container is running, you have an Ubuntu machine running right. Use the top toolbar in vscode to open new terminals as you need them.
    - Nothing you install with APT will persist unless you modify the dockerfile. This means you can safely experiment and not worry about corrupting your machine
-   - The Ubuntu machine will rebiuld good as new every time you restart docker or choose the rebuild container option
+   - The containered Ubuntu machine will rebuild good as new every time you restart docker or choose the rebuild container option
    - Only mounted volumes (files folders) can be modified persistently. This configuration mounts only the folder that the .devcontainer folder is placed in (and its subfolders).
 
-6. **Build Workspace Test ROS1 Noetic**:
+7. **Build Workspace Test ROS1 Noetic**:
    - After opening the cloned repository in VS Code, checkout the specific ROS1 Noetic branch:
      ```
      cd /docker_builds/ros_ws
@@ -73,10 +82,14 @@ This will start a containerized Ubuntu 20.04 machine with ROS Noetic installed i
   - Ensure that the Docker extension is properly connected to the Docker daemon. The connection status is visible in the Docker extension sidebar.
   - Verify that the container’s ports are correctly mapped in the Docker Compose file.
 
-- **Display Problems with X Server**:
-  - Run XLaunch from the Start Menu, choose "Multiple windows", set display number to 0, and select "Start no client". Ensure "Disable access control" is checked.
-  - Consider the security implications of disabling access control, especially on public networks.
-  - Automate the launch of X server by adding a shortcut to VcXsrv in your Startup folder with the appropriate settings saved in a configuration file (.xlaunch file).
+- **Display Problems / GUI apps not running**:
+  - Run the following command to allow Docker containers to connect to the host machines X server: xhost +local:docker
+  - To make this change permanent, add the command to your .bashrc or .profile file: echo "xhost +local:docker" >> ~/.bashrc
+  - Make sure your DISPLAY environment variable are the same on host and container
+    - On your host machine, check the current DISPLAY variable: echo $DISPLAY
+    - In the Docker container, check the DISPLAY variable: echo $DISPLAY
+    - If mismatched, manually set the DISPLAY variable to match the host's DISPLAY variable: export DISPLAY=:1  (replace:1 with actual output from your host machine)
+
 
 ### Performance
 - **Slow Container Performance**:

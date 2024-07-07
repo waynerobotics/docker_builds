@@ -96,10 +96,10 @@ int main(int argc, char **argv)
         pubVelocity.publish(cmdVel);
 
         //output for you entertainment
-        cout << "goal x = " << desired.x << endl
-             << "current x = " << current.x <<  endl
-             << "  disError = " << getDistanceError() << endl
-             << "cmd_vel = " << cmdVel.linear.x<< endl;
+      //  cout << "goal x = " << desired.x << endl
+      //       << "current x = " << current.x <<  endl
+      //       << "  disError = " << getDistanceError() << endl
+      //       << "cmd_vel = " << cmdVel.linear.x<< endl;
 
         //We set the frequency for 10Hz, this sleeps as long as it 
         //takes to keep that frequency

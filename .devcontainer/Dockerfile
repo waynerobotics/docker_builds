@@ -1,7 +1,6 @@
 FROM osrf/ros:noetic-desktop-full
 
 # Add vscode user with same UID and GID as your host system
-# (copied from https://code.visualstudio.com/remote/advancedcontainers/add-nonroot-user#_creating-a-nonroot-user)
 ARG USERNAME=vscode
 ARG USER_UID=1000
 ARG USER_GID=$USER_UID
@@ -9,48 +8,42 @@ RUN groupadd --gid $USER_GID $USERNAME \
     && useradd -s /bin/bash --uid $USER_UID --gid $USER_GID -m $USERNAME \
     && apt-get update \
     && apt-get install -y sudo \
-    && echo $USERNAME ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/$USERNAME \
+    && echo "$USERNAME ALL=(root) NOPASSWD:ALL" > /etc/sudoers.d/$USERNAME \
     && chmod 0440 /etc/sudoers.d/$USERNAME
-# Switch from root to user
+
+# Add user to video and dialout groups
+RUN sudo usermod --append --groups video,dialout,sudo $USERNAME
+
+# Switch to the vscode user
 USER $USERNAME
 
-# Add user to video group to allow access to webcam and com ports
-RUN sudo usermod --append --groups video $USERNAME
-RUN sudo usermod --append --groups dialout $USERNAME
+# Update all packages and install necessary dependencies
+RUN sudo apt update && sudo apt upgrade -y \
+    && sudo apt install -y python3-rosdep python3-rosinstall-generator python3-rosinstall python3-wstool \
+    build-essential python3-catkin-tools ros-noetic-rosparam-shortcuts ros-noetic-nmea-msgs ros-noetic-move-base-msgs \
+    ros-noetic-behaviortree-cpp-v3 ros-noetic-geographic-msgs libpthread-stubs0-dev libpcap-dev libroscpp-dev nano git
 
-# Update all packages
-RUN sudo apt update && sudo apt upgrade -y
+# Install turtlebot3 packages
+RUN sudo apt install -y ros-noetic-turtlebot3 ros-noetic-turtlebot3-msgs ros-noetic-turtlebot3-simulations ros-noetic-turtlebot3-navigation
 
 
-RUN sudo apt install -y python3-rosdep  python3-rosinstall-generator  
-RUN sudo apt install -y python3-rosinstall
-RUN sudo apt install -y python3-rosinstall
-RUN sudo apt install -y python3-wstool
+# Rosdep update with debugging ***ONLY ONCE EVER PER MACHINE***
+# RUN sudo rosdep init && rosdep update || { echo 'rosdep update failed'; exit 1; }
 
-# Rosdep update
-#####RUN sudo rosdep init  #only once ever on a machine?
-RUN rosdep update
-RUN sudo apt install -y build-essential
-RUN sudo apt install -y python3-catkin-tools
-RUN sudo apt install -y ros-noetic-rosparam-shortcuts
-RUN sudo apt install -y ros-noetic-nmea-msgs
-RUN sudo apt install -y ros-noetic-move-base-msgs
-RUN sudo apt install -y ros-noetic-behaviortree-cpp-v3
-RUN sudo apt install -y ros-noetic-geographic-msgs
-RUN sudo apt install -y libpthread-stubs0-dev
-RUN sudo apt install -y libpcap-dev
-RUN sudo apt install -y libroscpp-dev
-##### NO GEDIT - breaks docker initializing#####   RUN sudo apt install -y gedit
-RUN sudo apt install -y nano
-
-# Install Git
-RUN sudo apt install -y git
-
+### This seemed to not work on linux, but it might work on windows
+### On linux, I just used this in the devcontainer.json: "containerEnv": {"DISPLAY": "${localEnv:DISPLAY}"}
+### it also worked if I ran "echo $DISPLAY" in the host terminal, then used that output in the container ie: "export DISPLAY=:1"
 # Export display
-RUN echo "export DISPLAY=host.docker.internal:0.0" >> ~/.bashrc
+#RUN echo "export DISPLAY=host.docker.internal:0.0" >> ~/.bashrc
 
 # Source the ROS setup file
-RUN echo "source ~/../../opt/ros/${ROS_DISTRO}/setup.bash" >> ~/.bashrc
+RUN echo "source /opt/ros/${ROS_DISTRO}/setup.bash" >> ~/.bashrc
+
+# Export the turtlebot3 model
+RUN echo "export TURTLEBOT3_MODEL=burger" >> ~/.bashrc
 
 # Source the correct devel setup.bash for your workspace
 RUN echo "source /docker_builds/ros_ws/devel/setup.bash" >> ~/.bashrc
+
+# Debugging information
+RUN echo "Dockerfile build step completed successfully"
