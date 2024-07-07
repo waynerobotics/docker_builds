@@ -5,7 +5,13 @@
     "--privileged",
     "--network=host",
     "-e", "DISPLAY",
-    "-v", "/tmp/.X11-unix:/tmp/.X11-unix"
+    "-v", "/tmp/.X11-unix:/tmp/.X11-unix",
+    "--device=/dev/ttyUSB0",
+    "--device=/dev/ttyUSB1",
+    "--device=/dev/ttyACM0",
+    "--device=/dev/ttyACM1",
+    "--device=/dev/hidraw0",
+    "--device=/dev/hidraw1"
   ],
   "workspaceMount": "source=${localWorkspaceFolder},target=/${localWorkspaceFolderBasename},type=bind",
   "workspaceFolder": "/${localWorkspaceFolderBasename}",
@@ -15,5 +21,33 @@
   "containerEnv": {
     "DISPLAY": "${localEnv:DISPLAY}"
   },
-  "comment": "DISPLAY may also be :0 or :1 or something else. See README.md for details and troubleshooting display/gui problems"
+  "portsAttributes": {
+    "11311": {
+      "label": "ROS Master"
+    },
+    "8080": {
+      "label": "HTTP Streaming"
+    },
+    "8081": {
+      "label": "HTTP Streaming"
+    },
+    "22": {
+      "label": "SSH"
+    },
+    "3389": {
+      "label": "RDP"
+    },
+    "80": {
+      "label": "HTTP"
+    },
+    "443": {
+      "label": "HTTPS"
+    },
+    "3000": {
+      "label": "Web Interface"
+    },
+    "8888": {
+      "label": "Jupyter Notebooks"
+    }
+  }
 }
