@@ -3,7 +3,15 @@
     "dockerFile": "Dockerfile",
     "runArgs": [
       "--privileged",
-      "--network=host"
+      "--network=host",
+      "-e", "DISPLAY",
+      "-v", "/tmp/.X11-unix:/tmp/.X11-unix",
+      "--device=/dev/ttyUSB0",
+      "--device=/dev/ttyUSB1",
+      "--device=/dev/ttyACM0",
+      "--device=/dev/ttyACM1",
+      "--device=/dev/hidraw0",
+      "--device=/dev/hidraw1"
     ],
     "workspaceMount": "source=${localWorkspaceFolder},target=/${localWorkspaceFolderBasename},type=bind",
     "workspaceFolder": "/${localWorkspaceFolderBasename}",
@@ -11,7 +19,35 @@
       "source=${localEnv:HOME}${localEnv:USERPROFILE}/.bash_history,target=/home/vscode/.bash_history,type=bind"      
     ],
     "containerEnv": {
-      "DISPLAY": "host.docker.internal:0.0"
+      "DISPLAY": "${localEnv:DISPLAY}"
+    },
+    "portsAttributes": {
+      "11311": {
+        "label": "ROS Master"
+      },
+      "8080": {
+        "label": "HTTP Streaming"
+      },
+      "8081": {
+        "label": "HTTP Streaming"
+      },
+      "22": {
+        "label": "SSH"
+      },
+      "3389": {
+        "label": "RDP"
+      },
+      "80": {
+        "label": "HTTP"
+      },
+      "443": {
+        "label": "HTTPS"
+      },
+      "3000": {
+        "label": "Web Interface"
+      },
+      "8888": {
+        "label": "Jupyter Notebooks"
+      }
     }
   }
-  
