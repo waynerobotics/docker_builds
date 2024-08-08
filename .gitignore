@@ -49,3 +49,68 @@ qtcreator-*
 
 # Catkin custom files
 CATKIN_IGNORE
+
+# Ignore build, install, and log folders
+build/
+install/
+log/
+log/latest_build/
+ros_ws/log/
+ros_ws/log/latest_build/
+
+# Ignore package-specific build directories
+build_isolated/
+devel/
+devel_isolated/
+install_isolated/
+
+# Ignore all log files
+*.log
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+venv/
+pip-wheel-metadata/
+
+# C/C++
+*.o
+*.a
+*.so
+*.dylib
+*.lib
+*.d
+*.exe
+*.dll
+*.out
+*.app
+
+# Ignore IDE and editor folders
+.vscode/
+.idea/
+*.swp
+*~
+
+# Ignore temporary files
+tmp/
+temp/
+
+# Ignore user-specific files
+.DS_Store
+*.sublime-workspace
+
+# Ignore other common directories that are not part of the ROS2 source
+.rviz/
+.ros/
+
+# Ignore ROS2 specific generated files
+install/local_setup.*
+install/_local_setup_util_*
+install/*.json
+install/*.yaml
+install/*.bash
+install/*.sh
+install/*.zsh
