@@ -4,6 +4,7 @@ This will start a containerized Ubuntu 22.04 machine with ROS2 Humble installed 
 
 ## Prerequisites
 - Windows machine with Docker installed
+- WSL Installed
 - Visual Studio Code installed
 - Docker extension for VS Code installed
 - Dev Containers extension for VS Code installed
@@ -34,27 +35,27 @@ This will start a containerized Ubuntu 22.04 machine with ROS2 Humble installed 
    - Wait for the container to start, checking the status in the Docker extension sidebar.
 
 5. **Begin Work**:
-   - Once the container is running, you have an Ubuntu machine running right. Use the top toolbar in vscode to open new terminals as you need them.
+   - Once the container is running, you have a WSL instance accessible thorugh VSCode. Use the top toolbar in VSCode to open new terminals as you need them.
    - Nothing you install with APT will persist unless you modify the dockerfile. This means you can safely experiment and not worry about corrupting your machine
    - The Ubuntu machine will rebiuld good as new every time you restart docker or choose the rebuild container option
    - Only mounted volumes (files folders) can be modified persistently. This configuration mounts only the folder that the .devcontainer folder is placed in (and its subfolders).
   
 6. **Launch Xming server**:
-  - Run XLaunch from the Start Menu, choose "Multiple windows", set display number to 0, and select "Start no client".
-  - Automate the launch of X server by adding a shortcut to VcXsrv in your Startup folder with the appropriate settings saved in a configuration file (.xlaunch file).
+   - Run XLaunch from the Start Menu, choose "Multiple windows", set display number to 0, and select "Start no client".
+   - Automate the launch of X server by adding a shortcut to VcXsrv in your Startup folder with the appropriate settings saved in a configuration file (.xlaunch file).
 
 7. **Test ROS2 Humble**:
    - Run the following command to check if packages are installed
      ```
      ros2 pkg executables turtlesim
      ```
-   - The command should return the following:
-   ```
-   turtlesim draw_square
-   turtlesim mimic
-   turtlesim turtle_teleop_key
-   turtlesim turtlesim_node
-   ```
+     - The command should return the following:
+     ```
+     turtlesim draw_square
+     turtlesim mimic
+     turtlesim turtle_teleop_key
+     turtlesim turtlesim_node
+     ```
    - Start the turtlesim with this command
      ```
      ros2 run turtlesim turtlesim_node
