@@ -1,4 +1,4 @@
-FROM osrf/ros:humble-desktop-full
+FROM osrf/ros:jazzy-desktop-full
 
 # Add vscode user with same UID and GID as your host system
 # (copied from https://code.visualstudio.com/remote/advancedcontainers/add-nonroot-user#_creating-a-nonroot-user)
@@ -34,13 +34,13 @@ RUN sudo apt install -y python3-wstool
 
 # Install ROS packages
 RUN sudo apt install -y \
-ros-humble-navigation2 \
-ros-humble-nav2-bringup \
-ros-humble-turtlebot3 \
+ros-jazzy-navigation2 \
+ros-jazzy-nav2-bringup \
+ros-jazzy-turtlebot3 \
 #cros-humble-turtlebot3-navigation2 \
 #ros-humble-turtlebot3-slam \
-ros-humble-turtlebot3-gazebo \
-ros-humble-turtlebot3-simulations 
+ros-jazzy-turtlebot3-gazebo \
+ros-jazzy-turtlebot3-simulations 
 
 #RUN sudo apt update && apt install -y \
 #    ros-humble-turtlebot3-navigation
@@ -72,7 +72,7 @@ RUN sudo apt install -y tmux
 #### UNCOMMENT FOR UBUNTU? RUN echo "export DISPLAY=host.docker.internal:0.0" >> ~/.bashrc
 
 # Source the ROS setup file
-RUN echo "source /opt/ros/humble/setup.bash" >> ~/.bashrc
+RUN echo "source /opt/ros/jazzy/setup.bash" >> ~/.bashrc
 RUN echo "source /docker_builds/ros_ws/install/setup.bash" >> ~/.bashrc
 
 #export turtlebot3 model
