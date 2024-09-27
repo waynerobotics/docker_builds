@@ -34,13 +34,13 @@ RUN sudo apt install -y python3-wstool
 
 # Install ROS packages
 RUN sudo apt install -y \
-ros-humble-navigation2 \
-ros-humble-nav2-bringup \
-ros-humble-turtlebot3 \
-#cros-humble-turtlebot3-navigation2 \
-#ros-humble-turtlebot3-slam \
-ros-humble-turtlebot3-gazebo \
-ros-humble-turtlebot3-simulations 
+    ros-humble-navigation2 \
+    ros-humble-nav2-bringup \
+    ros-humble-turtlebot3 \
+    #cros-humble-turtlebot3-navigation2 \
+    #ros-humble-turtlebot3-slam \
+    ros-humble-turtlebot3-gazebo \
+    ros-humble-turtlebot3-simulations 
 
 #RUN sudo apt update && apt install -y \
 #    ros-humble-turtlebot3-navigation
