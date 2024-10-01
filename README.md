@@ -66,7 +66,7 @@ This will start a containerized Ubuntu 22.04 machine with ROS2 Humble installed 
      ros2 run turtlesim turtle_teleop_key
      ```
 ### Extend to Another Workspace
-- If everything works as expected, copy the `.devcontainer` folder to the root of another ROS1 workspace, open that folder in VS Code, and select 'Open in Container' from the command palette.
+- If everything works as expected, copy the `.devcontainer` folder to the root of another ROS2 workspace, open that folder in VS Code, and select 'Open in Container' from the command palette.
 - Modify .devcontainer/Dockerfile to source the correct ROS workspace. For example the last line of the Dockerfile currently reads:
     ```
     RUN echo "source /docker_builds/ros_ws/devel/setup.bash" >> ~/.bashrc
@@ -118,4 +118,4 @@ This will start a containerized Ubuntu 22.04 machine with ROS2 Humble installed 
 
 ## Conclusion
 
-This guide should help you set up and troubleshoot Docker containers in VS Code on your Windows machine, specifically for running ROS1 Noetic environments. For any unresolved issues, refer to the official documentation or seek community assistance.
+This guide should help you set up and troubleshoot Docker containers in VS Code on your Windows machine, specifically for running ROS2 Humble environments. For any unresolved issues, refer to the official documentation or seek community assistance.
