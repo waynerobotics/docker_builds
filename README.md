@@ -31,7 +31,7 @@ This will start a containerized Ubuntu 22.04 machine with ROS2 Humble installed 
 
 4. **Start Docker Container**:
    - Press `Ctrl + Shift + P` to open the command palette.
-   - Type `Docker: Compose Up` and select the option to start the Docker container.
+   - Type `Dev Containers: Rebuild and Reopen in Container` and select the option to start the Docker container.
    - Wait for the container to start, checking the status in the Docker extension sidebar.
 
 5. **Begin Work**:
