@@ -22,7 +22,8 @@ RUN curl -sSL http://get.gazebosim.org | sh && \
         ros-humble-rviz2 \
         ros-humble-tf2-tools \
         ros-humble-joint-state-publisher \
-        ros-humble-joint-state-publisher-gui && \
+        ros-humble-joint-state-publisher-gui \
+        ros-humble-robot-localization && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
