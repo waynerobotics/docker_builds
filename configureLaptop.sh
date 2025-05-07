@@ -40,7 +40,8 @@ sudo apt install -y \
   ros-humble-rviz2 \
   ros-humble-tf2-tools \
   ros-humble-joint-state-publisher \
-  ros-humble-joint-state-publisher-gui
+  ros-humble-joint-state-publisher-gui \
+  ros-humble-robot-localization
 
 # #################################
 # Driver Support
