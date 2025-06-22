@@ -15,14 +15,14 @@ RUN apt-get update && apt-get install -y ros-dev-tools
 # Install Gazebo and ROS 2 Gazebo-related tools
 RUN curl -sSL http://get.gazebosim.org | sh && \
     apt-get update && apt-get install -y \
-        ros-humble-gazebo-ros-pkgs \
-        ros-humble-gazebo-plugins \
-        ros-humble-robot-state-publisher \
-        ros-humble-xacro \
-        ros-humble-rviz2 \
-        ros-humble-tf2-tools \
-        ros-humble-joint-state-publisher \
-        ros-humble-joint-state-publisher-gui && \
+        ros-${ROS_DISTRO}-gazebo-ros-pkgs \
+        ros-${ROS_DISTRO}-gazebo-plugins \
+        ros-${ROS_DISTRO}-robot-state-publisher \
+        ros-${ROS_DISTRO}-xacro \
+        ros-${ROS_DISTRO}-rviz2 \
+        ros-${ROS_DISTRO}-tf2-tools \
+        ros-${ROS_DISTRO}-joint-state-publisher \
+        ros-${ROS_DISTRO}-joint-state-publisher-gui && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 

@@ -21,7 +21,7 @@ echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/ros-a
 
 # Update and install ROS 2
 sudo apt update && sudo apt upgrade -y
-sudo apt install -y ros-humble-desktop ros-dev-tools
+sudo apt install -y ros-${ROS_DISTRO}-desktop ros-dev-tools
 
 # #################################
 # Gazebo and ROS 2 Tools Install
@@ -33,14 +33,16 @@ curl -sSL http://get.gazebosim.org | sh
 
 # Install ROS 2 Gazebo and related tools
 sudo apt install -y \
-  ros-humble-gazebo-ros-pkgs \
-  ros-humble-gazebo-plugins \
-  ros-humble-robot-state-publisher \
-  ros-humble-xacro \
-  ros-humble-rviz2 \
-  ros-humble-tf2-tools \
-  ros-humble-joint-state-publisher \
-  ros-humble-joint-state-publisher-gui
+  ros-${ROS_DISTRO}-gazebo-ros-pkgs \
+  ros-${ROS_DISTRO}-gazebo-plugins \
+  ros-${ROS_DISTRO}-robot-state-publisher \
+  ros-${ROS_DISTRO}-xacro \
+  ros-${ROS_DISTRO}-rviz2 \
+  ros-${ROS_DISTRO}-tf2-tools \
+  ros-${ROS_DISTRO}-joint-state-publisher \
+  ros-${ROS_DISTRO}-joint-state-publisher-gui \
+  ros-${ROS_DISTRO}-ffmpeg-encoder-decoder \
+  ffmpeg v4l2loopback-utils
 
 # #################################
 # Driver Support

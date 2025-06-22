@@ -29,6 +29,7 @@ fi
 # Run the container in detached mode
 docker run -dit --name $CONTAINER_NAME \
     --net=host \
+    --privileged \
     --device=/dev/ttyUSB0 \
     --device=/dev/video0 \
     -e DISPLAY=$DISPLAY \
