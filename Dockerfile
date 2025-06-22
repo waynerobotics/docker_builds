@@ -22,7 +22,8 @@ RUN curl -sSL http://get.gazebosim.org | sh && \
         ros-${ROS_DISTRO}-rviz2 \
         ros-${ROS_DISTRO}-tf2-tools \
         ros-${ROS_DISTRO}-joint-state-publisher \
-        ros-${ROS_DISTRO}-joint-state-publisher-gui && \
+        ros-${ROS_DISTRO}-joint-state-publisher-gui \
+        ros-${ROS_DISTRO}-robot-localization && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 

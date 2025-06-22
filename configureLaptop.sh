@@ -42,7 +42,8 @@ sudo apt install -y \
   ros-${ROS_DISTRO}-joint-state-publisher \
   ros-${ROS_DISTRO}-joint-state-publisher-gui \
   ros-${ROS_DISTRO}-ffmpeg-encoder-decoder \
-  ffmpeg v4l2loopback-utils
+  ros-${ROS_DISTRO}-robot-localization
+  ffmpeg v4l2loopback-utils \
 
 # #################################
 # Driver Support
